@@ -1,39 +1,36 @@
-locals {
-  bucket_name             = "origin-s3-bucket-${random_pet.this.id}"
-  destination_bucket_name = "replica-s3-bucket-${random_pet.this.id}"
-  origin_region           = "eu-west-1"
-}
+
 
 provider "aws" {
   access_key                  = "mock_access_key"
-  region                      = local.origin_region
+  region                      = var.region
   s3_force_path_style         = true
   secret_key                  = "mock_secret_key"
   skip_credentials_validation = true
   skip_metadata_api_check     = true
   skip_requesting_account_id  = true
 
+
   endpoints {
-    apigateway     = "http://localstack:4567"
-    cloudformation = "http://localstack:4581"
-    cloudwatch     = "http://localstack:4582"
-    dynamodb       = "http://localstack:4569"
-    es             = "http://localstack:4578"
-    firehose       = "http://localstack:4573"
-    iam            = "http://localstack:4593"
-    kinesis        = "http://localstack:4568"
-    kms            = "http://localstack:4599"
-    lambda         = "http://localstack:4574"
-    route53        = "http://localstack:4580"
-    redshift       = "http://localstack:4577"
-    s3             = "http://localstack:4572"
-    secretsmanager = "http://localstack:4584"
-    ses            = "http://localstack:4579"
-    sns            = "http://localstack:4575"
-    sqs            = "http://localstack:4576"
-    ssm            = "http://localstack:4583"
-    stepfunctions  = "http://localstack:4585"
-    sts            = "http://localstack:4592"
+    apigateway     = "http://localstack-s3:4567"
+    cloudformation = "http://localstack-s3:4581"
+    cloudwatch     = "http://localstack-s3:4582"
+    dynamodb       = "http://localstack-s3:4569"
+    es             = "http://localstack-s3:4578"
+    firehose       = "http://localstack-s3:4573"
+    iam            = "http://localstack-s3:4593"
+    kinesis        = "http://localstack-s3:4568"
+    kms            = "http://localstack-s3:4599"
+    lambda         = "http://localstack-s3:4574"
+    route53        = "http://localstack-s3:4580"
+    redshift       = "http://localstack-s3:4577"
+    s3             = "http://localstack-s3:4572"
+    secretsmanager = "http://localstack-s3:4584"
+    ses            = "http://localstack-s3:4579"
+    sns            = "http://localstack-s3:4575"
+    sqs            = "http://localstack-s3:4576"
+    ssm            = "http://localstack-s3:4583"
+    stepfunctions  = "http://localstack-s3:4585"
+    sts            = "http://localstack-s3:4592"
   }
 }
 
@@ -46,8 +43,8 @@ resource "random_pet" "this" {
 module "s3_bucket" {
   source = "../../"
 
-  bucket = local.bucket_name
-  region = local.origin_region
+  bucket = var.bucket_name
+  region = var.region
   acl    = "private"
 
   versioning = {
@@ -55,4 +52,7 @@ module "s3_bucket" {
   }
 
 }
+
+variable "bucket_name" {}
+variable "region" {}
 
