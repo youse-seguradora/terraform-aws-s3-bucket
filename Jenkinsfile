@@ -26,22 +26,22 @@ pipeline {
         }
         stage('Terraform Init') {
             steps {
-                sh 'find . -type f -name "*.tf" -exec dirname {} \\;|sort -u | while read m; do (cd "$m" && terraform init -input=false -backend=false) || exit 1; done'
+                sh 'make tf-init'
             }
         }
         stage('Terraform Validate') {
             steps {
-                sh 'find . -name ".terraform" -prune -o -type f -name "*.tf" -exec dirname {} \\;|sort -u | while read m; do (cd "$m" && terraform validate && echo "√ $m") || exit 1 ; done'
+                sh 'make tf-validate'
             }
         }
         stage('Terraform Formatted') {
             steps {
-                sh 'if [[ -n "$(terraform fmt -write=false)" ]]; then echo "Some terraform files need be formatted, run \'terraform fmt\' to fix"; exit 1; fi'
+                sh 'make tf-fmt'
             }
         }
-        stage('Terraform Tflint') {
+        stage('Terraform Lint') {
             steps {
-                sh 'tflint'
+                sh 'make tf-lint'
             }
         }
         stage('Run terratest') {
@@ -53,7 +53,6 @@ pipeline {
     }
     post {
         always {
-            sh 'docker-compose down'
             cleanWs()
         }
     }
