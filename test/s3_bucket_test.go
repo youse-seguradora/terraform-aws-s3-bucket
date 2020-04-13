@@ -31,22 +31,12 @@ func TestS3Simple(t *testing.T) {
 		},
 	}
 	// At the end of the test, run `terraform destroy` to clean up any resources that were created
-	// defer terraform.Destroy(t, terraformOptions)
+	defer terraform.Destroy(t, terraformOptions)
 
 	// This will run `terraform init` and `terraform apply` and fail the test if there are any errors
 	terraform.InitAndApply(t, terraformOptions)
 
-	this_s3_bucket_bucket_domain_name := terraform.Output(t, terraformOptions, "this_s3_bucket_bucket_domain_name")
-	expectedUserName := expectedName + ".s3.amazonaws.com"
-	assert.Equal(t, expectedUserName, this_s3_bucket_bucket_domain_name)
+	thisS3BucketID := terraform.Output(t, terraformOptions, "this_s3_bucket_id")
+	assert.Equal(t, expectedName, thisS3BucketID)
 
-	this_s3_bucket_id := terraform.Output(t, terraformOptions, "this_s3_bucket_id")
-	assert.Equal(t, expectedName, this_s3_bucket_id)
-
-	const S3Endpoint = "http://localstack:4572"
-
-	// Verify that our Bucket has versioning enabled
-	actualStatus := aws.GetS3BucketVersioning(t, awsRegion, this_s3_bucket_id)
-	expectedStatus := "Enabled"
-	assert.Equal(t, expectedStatus, actualStatus)
 }
