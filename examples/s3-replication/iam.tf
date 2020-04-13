@@ -1,5 +1,7 @@
 resource "aws_iam_role" "replication" {
-  name = "s3-bucket-replication-${random_pet.this.id}"
+  name                  = "s3-bucket-replication-${random_pet.this.id}"
+  force_detach_policies = true
+
 
   assume_role_policy = <<POLICY
 {
@@ -63,3 +65,4 @@ resource "aws_iam_policy_attachment" "replication" {
   roles      = [aws_iam_role.replication.name]
   policy_arn = aws_iam_policy.replication.arn
 }
+
