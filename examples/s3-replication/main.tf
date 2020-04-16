@@ -1,13 +1,7 @@
-locals {
-  bucket_name             = "origin-s3-bucket-${random_pet.this.id}"
-  destination_bucket_name = "replica-s3-bucket-${random_pet.this.id}"
-  origin_region           = "eu-west-1"
-  replica_region          = "eu-central-1"
-}
 
 provider "aws" {
   access_key                  = "mock_access_key"
-  region                      = local.origin_region
+  region                      = var.origin_region
   s3_force_path_style         = true
   secret_key                  = "mock_secret_key"
   skip_credentials_validation = true
@@ -41,7 +35,7 @@ provider "aws" {
 
 provider "aws" {
   access_key                  = "mock_access_key"
-  region                      = local.replica_region
+  region                      = var.replica_region
   s3_force_path_style         = true
   secret_key                  = "mock_secret_key"
   skip_credentials_validation = true
@@ -93,8 +87,8 @@ module "replica_bucket" {
     aws = aws.replica
   }
 
-  bucket = local.destination_bucket_name
-  region = local.replica_region
+  bucket = replica_bucket_name
+  region = var.replica_region
   acl    = "private"
 
   versioning = {
@@ -105,8 +99,8 @@ module "replica_bucket" {
 module "s3_bucket" {
   source = "../../"
 
-  bucket = local.bucket_name
-  region = local.origin_region
+  bucket = origin_bucket_name
+  region = var.origin_region
   acl    = "private"
 
   versioning = {
@@ -169,3 +163,8 @@ module "s3_bucket" {
   }
 
 }
+
+variable "origin_bucket_name" {}
+variable "replica_bucket_name" {}
+variable "origin_region" {}
+variable "replica_region" {}
