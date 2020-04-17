@@ -33,6 +33,11 @@ output "this_s3_bucket_region" {
   value       = module.s3_bucket.this_s3_bucket_region
 }
 
+output "this_s3_bucket_replica_region" {
+  description = "The AWS region this bucket resides in."
+  value       = module.replica_bucket.this_s3_bucket_region
+}
+
 output "this_s3_bucket_website_endpoint" {
   description = "The website endpoint, if the bucket is configured with a website. If not, this will be an empty string."
   value       = module.s3_bucket.this_s3_bucket_website_endpoint

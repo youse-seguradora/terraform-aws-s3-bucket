@@ -49,6 +49,7 @@ No requirements.
 | this\_s3\_bucket\_hosted\_zone\_id | The Route 53 Hosted Zone ID for this bucket's region. |
 | this\_s3\_bucket\_id | The name of the bucket. |
 | this\_s3\_bucket\_region | The AWS region this bucket resides in. |
+| this\_s3\_bucket\_replica\_region | The AWS region this bucket resides in. |
 | this\_s3\_bucket\_website\_domain | The domain of the website endpoint, if the bucket is configured with a website. If not, this will be an empty string. This is used to create Route 53 alias records. |
 | this\_s3\_bucket\_website\_endpoint | The website endpoint, if the bucket is configured with a website. If not, this will be an empty string. |
 

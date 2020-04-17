@@ -87,7 +87,7 @@ module "replica_bucket" {
     aws = aws.replica
   }
 
-  bucket = replica_bucket_name
+  bucket = var.replica_bucket_name
   region = var.replica_region
   acl    = "private"
 
@@ -99,7 +99,7 @@ module "replica_bucket" {
 module "s3_bucket" {
   source = "../../"
 
-  bucket = origin_bucket_name
+  bucket = var.origin_bucket_name
   region = var.origin_region
   acl    = "private"
 
@@ -130,7 +130,7 @@ module "s3_bucket" {
         }
 
         destination = {
-          bucket             = "arn:aws:s3:::${local.destination_bucket_name}"
+          bucket             = "arn:aws:s3:::${var.replica_bucket_name}"
           storage_class      = "STANDARD"
           replica_kms_key_id = aws_kms_key.replica.arn
           account_id         = data.aws_caller_identity.current.account_id
@@ -145,7 +145,7 @@ module "s3_bucket" {
         priority = 20
 
         destination = {
-          bucket        = "arn:aws:s3:::${local.destination_bucket_name}"
+          bucket        = "arn:aws:s3:::${var.replica_bucket_name}"
           storage_class = "STANDARD"
         }
 
