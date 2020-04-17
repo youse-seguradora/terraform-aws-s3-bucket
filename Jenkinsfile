@@ -53,6 +53,7 @@ pipeline {
     }
     post {
         always {
+            sh 'sudo chmod -R a+rw .'
             cleanWs()
         }
     }
