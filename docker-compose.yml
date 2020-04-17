@@ -21,4 +21,4 @@ services:
     volumes:
       - .:/code
     depends_on:
-      - localstack
+      - localstack-s3
