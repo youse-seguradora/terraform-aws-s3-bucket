@@ -1,8 +1,7 @@
 version: '3'
 services:
-  localstack:
+  localstack-s3:
     image: localstack/localstack
-    container_name: localstack-s3
     environment:
       - SERVICES=${SERVICES- }
       - DEBUG=${DEBUG- }
