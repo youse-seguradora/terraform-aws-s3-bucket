@@ -14,7 +14,7 @@ help:
 
 .PHONY: test
 test: ## Execute tests
-	@docker-compose -p ${JOB_NAME}_${BUILD_NUMBER} up go
+	@docker-compose -p ${JOB_NAME}_${BUILD_NUMBER} up go --exit-code-from go
 
 .PHONY: clean
 clean:
