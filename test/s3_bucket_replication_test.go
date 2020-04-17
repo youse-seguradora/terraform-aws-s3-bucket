@@ -46,4 +46,9 @@ func TestS3Replication(t *testing.T) {
 	thisReplicaBucketID := terraform.Output(t, terraformOptions, "this_replica_s3_bucket_id")
 	assert.Equal(t, expectedNameReplica, thisReplicaBucketID)
 
+	thisS3BucketRegionOrigin := terraform.Output(t, terraformOptions, "this_s3_bucket_region")
+	assert.Equal(t, awsRegionOrigin, thisS3BucketRegionOrigin)
+
+	thisS3BucketRegionReplica := terraform.Output(t, terraformOptions, "this_s3_bucket_replica_region")
+	assert.Equal(t, awsRegionReplica, thisS3BucketRegionReplica)
 }
