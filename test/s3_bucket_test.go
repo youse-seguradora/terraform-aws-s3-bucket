@@ -39,4 +39,6 @@ func TestS3Simple(t *testing.T) {
 	thisS3BucketID := terraform.Output(t, terraformOptions, "this_s3_bucket_id")
 	assert.Equal(t, expectedName, thisS3BucketID)
 
+	thisS3BucketRegion := terraform.Output(t, terraformOptions, "this_s3_bucket_region")
+	assert.Equal(t, awsRegion, thisS3BucketRegion)
 }
