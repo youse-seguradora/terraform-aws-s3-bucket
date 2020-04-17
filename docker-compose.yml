@@ -1,6 +1,6 @@
 version: '3'
 services:
-  localstack-s3:
+  localstack:
     image: localstack/localstack:latest
     environment:
       - SERVICES=${SERVICES- }
@@ -21,4 +21,4 @@ services:
     volumes:
       - .:/code
     depends_on:
-      - localstack-s3
+      - localstack
