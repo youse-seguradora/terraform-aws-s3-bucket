@@ -1,7 +1,7 @@
 version: '3'
 services:
   localstack-s3:
-    image: localstack/localstack
+    image: localstack/localstack:latest
     environment:
       - SERVICES=${SERVICES- }
       - DEBUG=${DEBUG- }
