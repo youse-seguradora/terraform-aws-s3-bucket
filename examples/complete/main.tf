@@ -213,7 +213,7 @@ module "s3_bucket" {
 
   grant = [
     {
-      id          = data.aws_canonical_user_id.current.id
+      id          = "cda1c626820f0256b7b8c9939fb8c8b95d2cb448e46a56232e49195df360ec75"
       type        = "CanonicalUser"
       permissions = ["FULL_CONTROL"]
     },
