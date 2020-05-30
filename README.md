@@ -27,7 +27,7 @@ Only Terraform 0.12 is supported.
 ## Usage
 
 ### Private bucket with versioning enabled
-terraform-aws-s3-bucket
+
 ```hcl
 module "s3_bucket" {
   source = "terraform-aws-modules/s3-bucket/aws"
