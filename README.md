@@ -18,6 +18,7 @@ These features of S3 bucket configurations are supported:
 - object locking
 - Cross-Region Replication (CRR)
 - ELB log delivery bucket policy
+- ACL policy grants
 
 ## Terraform versions
 
