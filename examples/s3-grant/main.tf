@@ -1,4 +1,3 @@
-
 provider "aws" {
   access_key                  = "mock_access_key"
   region                      = var.region
@@ -7,7 +6,6 @@ provider "aws" {
   skip_credentials_validation = true
   skip_metadata_api_check     = true
   skip_requesting_account_id  = true
-
 
   endpoints {
     apigateway     = "http://localhost:4566"
@@ -33,8 +31,6 @@ provider "aws" {
   }
 }
 
-data "aws_caller_identity" "current" {}
-
 resource "random_pet" "this" {
   length = 2
 }
@@ -44,7 +40,19 @@ module "s3_bucket" {
 
   bucket = var.bucket_name
   region = var.region
-  acl    = "private"
+
+  grant = [
+    {
+      id          = "cda1c626820f0256b7b8c9939fb8c8b95d2cb448e46a56232e49195df360ec75"
+      type        = "CanonicalUser"
+      permissions = ["FULL_CONTROL"]
+    },
+    {
+      type        = "Group"
+      permissions = ["READ_ACP", "WRITE"]
+      uri         = "http://acs.amazonaws.com/groups/s3/LogDelivery"
+    }
+  ]
 
   versioning = {
     enabled = true
