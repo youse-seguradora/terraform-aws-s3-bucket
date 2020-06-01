@@ -213,7 +213,7 @@ module "s3_bucket" {
 
   grant = [
     {
-      id          = "cda1c626820f0256b7b8c9939fb8c8b95d2cb448e46a56232e49195df360ec75"
+      id          = "c5fecbfd6ad3147cccd9a16454d6a676ffdf778021bca0406ff8a265aa9de3c6"
       type        = "CanonicalUser"
       permissions = ["FULL_CONTROL"]
     },
