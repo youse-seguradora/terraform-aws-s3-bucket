@@ -27,13 +27,3 @@ output "this_s3_bucket_region" {
   description = "The AWS region this bucket resides in."
   value       = module.s3_bucket.this_s3_bucket_region
 }
-
-output "this_s3_bucket_website_endpoint" {
-  description = "The website endpoint, if the bucket is configured with a website. If not, this will be an empty string."
-  value       = module.s3_bucket.this_s3_bucket_website_endpoint
-}
-
-output "this_s3_bucket_website_domain" {
-  description = "The domain of the website endpoint, if the bucket is configured with a website. If not, this will be an empty string. This is used to create Route 53 alias records. "
-  value       = module.s3_bucket.this_s3_bucket_website_domain
-}
